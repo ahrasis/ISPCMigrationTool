@@ -20,8 +20,8 @@
 #common_args='-aPv --dry-run'
 common_args='-aPv'
 install_rsync="apt-get -y install rsync"
-www_start="service apache2 start"
-www_stop="service apache2 stop"
+www_start="service nginx start"
+www_stop="service nginx stop"
 db_start="service mysql start"
 db_stop="service mysql stop"
 
@@ -154,18 +154,18 @@ function files_migration {
   echo "############# (see readme.md)                        #######"
   echo "############################################################"
   echo "############# Step4:                                 #######"
-  echo "############# Copy /etc/apache2/sites-available      #######"
+  echo "############# Copy /etc/nginx/sites-available      #######"
   echo "############################################################"
   echo "############# Step5:                                 #######"
-  echo "############# Copy /etc/apache2/sites-enabled        #######"
+  echo "############# Copy /etc/nginx/sites-enabled        #######"
   echo "############################################################"
   rsync $common_args $main_server:/var/backup/ /var/backup
   rsync $common_args $main_server:/etc/passwd /root/old-server/
   rsync $common_args $main_server:/etc/group  /root/old-server/
   rsync $common_args $main_server:/etc/shadow  /root/old-server/
   rsync $common_args $main_server:/etc/gshadow  /root/old-server/
-  rsync $common_args $main_server:/etc/apache2/sites-available/ /etc/apache2/sites-available
-  rsync $common_args $main_server:/etc/apache2/sites-enabled/ /etc/apache2/sites-enabled
+  rsync $common_args $main_server:/etc/nginx/sites-available/ /etc/nginx/sites-available
+  rsync $common_args $main_server:/etc/nginx/sites-enabled/ /etc/nginx/sites-enabled
   echo "############################################################"
   echo "############################################################"
   menu
